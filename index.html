@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MyChat - A multilingual AI-powered voice and text chatbot using Sarvam AI">
+    <title>MyChat — AI Voice & Text Chatbot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== LOGIN PAGE ===== -->
+    <div id="login-page" class="page active">
+        <div class="login-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="login-card">
+            <div class="login-brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="22" stroke="url(#g1)" stroke-width="3"/><path d="M16 20a8 8 0 1 1 16 0c0 4-3 6-5 8s-3 4-3 8m0 0h0" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"/><circle cx="24" cy="40" r="1.5" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="48" y2="48"><stop stop-color="#818cf8"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs></svg>
+                </div>
+                <h1>MyChat</h1>
+                <p class="tagline">Your multilingual AI companion — talk, type, or listen.</p>
+            </div>
+            <form id="login-form" autocomplete="off">
+                <div class="input-group">
+                    <input type="text" id="login-username" placeholder=" " required>
+                    <label for="login-username">Username</label>
+                    <div class="input-line"></div>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="login-password" placeholder=" " required>
+                    <label for="login-password">Password</label>
+                    <div class="input-line"></div>
+                </div>
+                <button type="submit" id="login-btn" class="btn-primary">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loader"></span>
+                </button>
+            </form>
+            <p class="login-hint">Enter any username & password to continue</p>
+        </div>
+    </div>
+
+    <!-- ===== CHAT PAGE ===== -->
+    <div id="chat-page" class="page">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <span class="brand-dot"></span>
+                    <span>MyChat</span>
+                </div>
+                <button id="new-chat-btn" class="icon-btn" title="New Chat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+            </div>
+
+            <div class="sidebar-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="search-chats" placeholder="Search chats…">
+            </div>
+
+            <div class="sidebar-chats" id="chat-list">
+                <!-- Chat history items render here -->
+            </div>
+
+            <div class="sidebar-settings">
+                <div class="setting-row">
+                    <span>Theme</span>
+                    <button id="theme-toggle" class="toggle-btn" title="Toggle theme">
+                        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </div>
+                <div class="setting-row">
+                    <span>TTS Language</span>
+                    <select id="tts-lang">
+                        <option value="hi-IN">Hindi</option>
+                        <option value="en-IN">English</option>
+                        <option value="bn-IN">Bengali</option>
+                        <option value="ta-IN">Tamil</option>
+                        <option value="te-IN">Telugu</option>
+                        <option value="kn-IN">Kannada</option>
+                        <option value="ml-IN">Malayalam</option>
+                        <option value="mr-IN">Marathi</option>
+                        <option value="gu-IN">Gujarati</option>
+                        <option value="pa-IN">Punjabi</option>
+                    </select>
+                </div>
+                <div class="setting-row user-row">
+                    <div class="user-info">
+                        <div class="avatar" id="user-avatar"></div>
+                        <span id="user-display-name"></span>
+                    </div>
+                    <button id="logout-btn" class="icon-btn" title="Logout">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <header class="chat-header">
+                <button id="sidebar-toggle" class="icon-btn" title="Toggle sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <div class="header-title">
+                    <h2 id="current-chat-title">New Chat</h2>
+                    <span class="model-badge">sarvam-m</span>
+                </div>
+                <button id="delete-chat-btn" class="icon-btn" title="Delete chat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+            </header>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="welcome-screen" id="welcome-screen">
+                    <div class="welcome-icon">💬</div>
+                    <h2>How can I help you today?</h2>
+                    <p>Type a message or tap the mic to start talking</p>
+                    <div class="welcome-chips">
+                        <button class="chip" data-prompt="Tell me a joke in Hindi">🎭 Tell me a joke in Hindi</button>
+                        <button class="chip" data-prompt="Explain quantum computing simply">🔬 Explain quantum computing</button>
+                        <button class="chip" data-prompt="Write a short poem about nature">🌿 Write a poem about nature</button>
+                        <button class="chip" data-prompt="What's the weather like in Delhi?">🌤️ Weather in Delhi?</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Voice Recording Overlay -->
+            <div class="voice-overlay" id="voice-overlay">
+                <div class="voice-visualizer">
+                    <canvas id="voice-canvas"></canvas>
+                    <div class="voice-timer" id="voice-timer">00:00</div>
+                </div>
+                <p class="voice-status" id="voice-status">Listening…</p>
+                <button id="stop-record-btn" class="voice-stop-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+                </button>
+            </div>
+
+            <!-- Input Bar -->
+            <div class="chat-input-bar">
+                <div class="input-wrapper">
+                    <textarea id="message-input" placeholder="Type a message…" rows="1"></textarea>
+                    <button id="mic-btn" class="input-action-btn mic-btn" title="Voice input">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="1" width="6" height="12" rx="3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                    </button>
+                    <button id="send-btn" class="input-action-btn send-btn" title="Send message" disabled>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
